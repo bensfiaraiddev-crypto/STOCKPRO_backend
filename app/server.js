@@ -14,7 +14,10 @@ app.use(cors({
             callback(null,true)
 
         }else callback(new Error(`cors error:origin ${origin}`))
-    }
+    
+    },
+    credentials:true,
+    
 
 }))
 
