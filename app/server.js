@@ -12,10 +12,11 @@ app.use(cors({
         if(allowedorigins.indexOf(origin) !== -1){
             callback(null,true)
 
-        }else callback(new Error("cors block"))
+        }else callback(new Error(`cors error:origin ${origin}`))
     }
 
 }))
+
 
 app.get("/",(req,res)=>{
     res.sendStatus(200).send({"detail":"it works"})
@@ -34,6 +35,14 @@ app.get("/ping",(req,res)=>{
 })
 
 
+
+app.use((err,req,res,next)=>{
+    if(err.message.include("cors")){
+        res.status(403).json({"err":err.message})
+    }
+    return res.status(500).json({ error: 'Internal Server Error' });
+
+})
 
 
 app.listen(PORT,()=>{console.log(`server is on listning on http://localhost:${PORT}`)})
