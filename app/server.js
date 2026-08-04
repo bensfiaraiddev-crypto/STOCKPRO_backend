@@ -17,7 +17,8 @@ app.use(cors({
     
     },
     credentials:true,
-    
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'], // 2. ADDED 'HEAD' to allow your YAML script!
+  allowedHeaders: ['Content-Type', 'Authorization']
 
 }))
 
