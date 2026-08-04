@@ -1,10 +1,10 @@
 import express from 'express'
 
 const app = express()
-const PORT = 5147
+const PORT = process.env.PORT || 5142
 
 app.get("/",(req,res)=>{
-    res.send({"status":200,"detail":"server is working"})
+    res.sendStatus(200).send({"detail":"it works"})
     
 
 })
@@ -13,7 +13,11 @@ app.get("/",(req,res)=>{
 
 
 
+app.get("/ping",(req,res)=>{
+    res.sendStatus(200).send("pinged")
+    console.log("ping arrived")
 
+})
 
 
 
