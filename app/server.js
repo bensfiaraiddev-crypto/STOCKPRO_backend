@@ -22,7 +22,7 @@ app.use(cors({
 
 }))
 
-
+app.options('*', cors());
 app.get("/",(req,res)=>{
     res.sendStatus(200).send({"detail":"it works"})
     
