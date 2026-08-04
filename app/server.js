@@ -37,7 +37,7 @@ app.get("/ping",(req,res)=>{
 
 
 app.use((err,req,res,next)=>{
-    if(err.message.include("cors")){
+    if(err.message.includes("cors")){
         res.status(403).json({"err":err.message})
     }
     return res.status(500).json({ error: 'Internal Server Error' });
