@@ -8,7 +8,7 @@ const allowedorigins = ['http//localhost:5173']
 
 app.use(cors({
     origin: function origin(origin,callback){
-        if(!origin) callback(null,true)
+        if(!origin|| origin === 'undefined' || origin === 'null') callback(null,true)
         if(allowedorigins.indexOf(origin) !== -1){
             callback(null,true)
 
