@@ -4,7 +4,7 @@ const app = express()
 const PORT = process.env.PORT 
 
 
-const allowedorigins = ['http//localhost:5173']
+const allowedorigins = ['http://localhost:5173']
 
 app.set("trust proxy",1)
 
@@ -37,7 +37,7 @@ app.get("/",(req,res)=>{
 
 
 app.get("/ping",(req,res)=>{
-    res.sendStatus(200).send("pinged")
+    res.Status(200).send("pinged")
     console.log("ping arrived")
 
 })
