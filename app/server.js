@@ -9,19 +9,23 @@ const allowedorigins = ['http://localhost:5173']
 app.set("trust proxy",1)
 
 app.use(cors({
-    origin: function origin(origin,callback){
+    origin: function origin(origin, callback){
         const normalizedOrigin = String(origin).trim().toLowerCase();
-        if(!origin|| normalizedOrigin === 'undefined' || normalizedOrigin === 'null') callback(null,true)
+        
+        // 2. FIXED: Added 'return' keywords to stop execution loops
+        if(!origin || normalizedOrigin === 'undefined' || normalizedOrigin === 'null') {
+            return callback(null, true);
+        }
+        
         if(allowedorigins.indexOf(origin) !== -1){
-            callback(null,true)
-
-        }else callback(new Error(`cors error:origin ${origin}`))
-    
+            return callback(null, true);
+        } else {
+            return callback(new Error(`cors error:origin ${origin}`));
+        }
     },
-    credentials:true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'], // 2. ADDED 'HEAD' to allow your YAML script!
-  allowedHeaders: ['Content-Type', 'Authorization']
-
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'], 
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 app.options('/*splat', cors());
