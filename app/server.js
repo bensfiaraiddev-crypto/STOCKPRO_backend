@@ -43,14 +43,11 @@ app.get("/ping",(req,res)=>{
 })
 
 
-
-app.use((err,req,res,next)=>{
-    if(err.message.includes("cors")){
-        res.status(403).json({"err":err.message})
-    }
-    return res.status(500).json({ error: 'Internal Server Error' });
-
-})
-
-
+app.use((err, req, res, next) => {
+  if (err && err.message && err.message.includes('CORS')) {
+    return res.status(403).json({ error: err.message });
+  }
+  console.error("System Error caught:", err.message);
+  return res.status(500).json({ error: 'Internal Server Error' });
+});
 app.listen(PORT,()=>{console.log(`server is on listning on http://localhost:${PORT}`)})
