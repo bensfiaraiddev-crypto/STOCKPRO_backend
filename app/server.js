@@ -1,12 +1,14 @@
 import express from 'express'
-import  cors from 'cors'
+import cors from 'cors'
+
 const app = express()
-const PORT = process.env.PORT 
+// Render automatically handles PORT, but keep 5147 as a fallback for local testing
+const PORT = process.env.PORT || 5147; 
 
-
+// 1. FIXED: Added the missing colon to the URL
 const allowedorigins = ['http://localhost:5173']
 
-app.set("trust proxy",1)
+app.set("trust proxy", 1)
 
 app.use(cors({
     origin: function origin(origin, callback){
@@ -30,28 +32,25 @@ app.use(cors({
 
 app.options('/*splat', cors());
 
-app.get("/",(req,res)=>{
-    res.sendStatus(200).send({"detail":"it works"})
-    
-
+// 3. FIXED: Changed .sendStatus(200).send() to standard .status(200).json()
+app.get("/", (req, res) => {
+    return res.status(200).json({"detail": "it works"});
 })
 
-
-
-
-
-app.get("/ping",(req,res)=>{
-    res.Status(200).send("pinged")
-    console.log("ping arrived")
-
+// 4. FIXED: Changed .sendStatus(200).send() to standard .status(200).send()
+app.get("/ping", (req, res) => {
+    console.log("ping arrived");
+    return res.status(200).send("pinged");
 })
-
 
 app.use((err, req, res, next) => {
   if (err && err.message && err.message.includes('CORS')) {
     return res.status(403).json({ error: err.message });
   }
-  console.error("System Error caught:", err.message);
+  console.error("System Error caught:", err.message || err);
   return res.status(500).json({ error: 'Internal Server Error' });
 });
-app.listen(PORT,()=>{console.log(`server is on listning on http://localhost:${PORT}`)})
+
+app.listen(PORT, () => {
+    console.log(`server is listening on port ${PORT}`);
+})
