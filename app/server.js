@@ -6,6 +6,8 @@ const PORT = process.env.PORT
 
 const allowedorigins = ['http//localhost:5173']
 
+app.set("trust proxy",1)
+
 app.use(cors({
     origin: function origin(origin,callback){
         const normalizedOrigin = String(origin).trim().toLowerCase();
