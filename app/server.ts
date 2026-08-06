@@ -32,6 +32,12 @@ app.get("/",(req:Request,res:Response)=>{
     })
 })
 
+app.get('/ping',(req:Request,res:Response)=>{
+    console.log(`i was pinged by ${req.ip}`)
+    res.status(200).send({'message':"thanks for ping"})
+    
+})
+
 app.use(express.json)
 app.listen(PORT,()=>console.log(`port is http://localhost:${PORT}`)
 )
