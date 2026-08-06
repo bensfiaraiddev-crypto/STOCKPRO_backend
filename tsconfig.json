@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": "./app",           // 👈 Tells TS to start looking inside the "app" folder
+    "outDir": "./dist",           // 👈 Tells TS to output the compiled JS into the "dist" folder
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["app/**/*"]         // 👈 Ensures TS only watches and compiles files inside "app"
+}

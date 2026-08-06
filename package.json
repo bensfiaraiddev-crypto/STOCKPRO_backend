@@ -4,9 +4,10 @@
   "description": "my backend app",
   "main": "index.js",
   "scripts": {
+    "dev": "tsx watch app/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "builde":"echo \"no building required \"",
-    "start" : "node app/server.js"
+    "builde": "tsc",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +26,12 @@
   },
   "engines": {
     "node": ">= 22.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.2",
+    "tsx": "^4.23.8",
+    "typescript": "^7.0.2"
   }
 }
